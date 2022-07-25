@@ -16,6 +16,9 @@ const config = {
   performance: {
     hints: false,
   },
+  devServer: {
+    hot: true,
+  },
 };
 
 export default config;

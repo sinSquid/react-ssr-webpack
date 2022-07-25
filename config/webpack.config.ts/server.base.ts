@@ -9,20 +9,9 @@ export default {
   name: 'server',
   target: 'node',
   entry: {
-    // server: [path.resolve(paths.srcServer, 'index.js')],
-    server: [
-      require.resolve('core-js/stable'),
-      require.resolve('regenerator-runtime/runtime'),
-      path.resolve(paths.srcServer, 'index.ts'),
-    ],
+    server: [require.resolve('core-js/stable'), path.resolve(paths.srcServer, 'index.ts')],
   },
-  externals: [
-    nodeExternals({
-      // we still want imported css from external files to be bundled otherwise 3rd party packages
-      // which require us to include their own css would not work properly
-      // whitelist: /\.css$/,
-    }),
-  ],
+  externals: [nodeExternals({})],
   output: {
     path: paths.serverBuild,
     filename: 'server.js',
@@ -49,7 +38,4 @@ export default {
     timings: true,
     version: false,
   },
-  /* node: {
-    __dirname: false,
-  }, */
 };

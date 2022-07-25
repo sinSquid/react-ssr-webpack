@@ -8,6 +8,6 @@ const config = {
   devtool: generateSourceMap ? 'source-map' : false,
 };
 
-config.output.filename = 'bundle.[hash:8].js';
+config.output.filename = '[name].[contenthash].bundle.js';
 
 export default config;

@@ -1,6 +1,5 @@
 import webpack from 'webpack';
 import rimraf from 'rimraf';
-import chalk from 'chalk';
 import getConfig from '../config/webpack.config.ts';
 import paths from '../config/paths';
 import { logMessage, compilerPromise } from './utils';
@@ -22,7 +21,7 @@ const build = async () => {
       console.log(stats.toString(clientConfig.stats));
       return;
     }
-    console.error(chalk.red(stats.compilation.errors));
+    console.error(stats.compilation.errors);
   });
 
   // wait until client and server is compiled

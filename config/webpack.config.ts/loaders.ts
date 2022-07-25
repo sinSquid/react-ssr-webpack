@@ -38,13 +38,11 @@ const babelLoader = {
 const cssModuleLoaderClient = {
   test: cssModuleRegex,
   use: [
-    require.resolve('css-hot-loader'),
     MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
       options: {
-        localsConvention: 'camelCase',
-        modules: cssModuleOptions,
+        modules: { ...cssModuleOptions, exportLocalsConvention: 'camelCase' },
         importLoaders: 1,
         sourceMap: generateSourceMap,
       },
@@ -56,10 +54,6 @@ const cssModuleLoaderClient = {
       },
     },
   ],
-  // Don't consider CSS imports dead code even if the
-  // containing package claims to have no side effects.
-  // Remove this when webpack adds a warning or an error for this.
-  // See https://github.com/webpack/webpack/issues/6571
   sideEffects: true,
 };
 
@@ -67,7 +61,6 @@ const cssLoaderClient = {
   test: cssRegex,
   exclude: cssModuleRegex,
   use: [
-    require.resolve('css-hot-loader'),
     MiniCssExtractPlugin.loader,
     require.resolve('css-loader'),
     {
@@ -77,10 +70,6 @@ const cssLoaderClient = {
       },
     },
   ],
-  // Don't consider CSS imports dead code even if the
-  // containing package claims to have no side effects.
-  // Remove this when webpack adds a warning or an error for this.
-  // See https://github.com/webpack/webpack/issues/6571
   sideEffects: true,
 };
 
@@ -90,10 +79,12 @@ const cssModuleLoaderServer = {
     {
       loader: require.resolve('css-loader'),
       options: {
-        onlyLocals: true,
-        localsConvention: 'camelCase',
         importLoaders: 1,
-        modules: cssModuleOptions,
+        modules: {
+          ...cssModuleOptions,
+          exportLocalsConvention: 'camelCase',
+          exportOnlyLocals: true,
+        },
       },
     },
     {
@@ -103,10 +94,6 @@ const cssModuleLoaderServer = {
       },
     },
   ],
-  // Don't consider CSS imports dead code even if the
-  // containing package claims to have no side effects.
-  // Remove this when webpack adds a warning or an error for this.
-  // See https://github.com/webpack/webpack/issues/6571
   sideEffects: true,
 };
 
@@ -114,10 +101,6 @@ const cssLoaderServer = {
   test: cssRegex,
   exclude: cssModuleRegex,
   use: [MiniCssExtractPlugin.loader, require.resolve('css-loader')],
-  // Don't consider CSS imports dead code even if the
-  // containing package claims to have no side effects.
-  // Remove this when webpack adds a warning or an error for this.
-  // See https://github.com/webpack/webpack/issues/6571
   sideEffects: true,
 };
 
@@ -126,7 +109,7 @@ const urlLoaderClient = {
   loader: require.resolve('url-loader'),
   options: {
     limit: 2048,
-    name: 'assets/[name].[hash:8].[ext]',
+    name: 'assets/[name].[contenthash].[ext]',
   },
 };
 
@@ -144,7 +127,7 @@ const fileLoaderClient = {
     {
       loader: require.resolve('file-loader'),
       options: {
-        name: 'assets/[name].[hash:8].[ext]',
+        name: 'assets/[name].[contenthash].[ext]',
       },
     },
   ],
@@ -156,7 +139,7 @@ const fileLoaderServer = {
     {
       loader: require.resolve('file-loader'),
       options: {
-        name: 'assets/[name].[hash:8].[ext]',
+        name: 'assets/[name].[contenthash].[ext]',
         emitFile: false,
       },
     },
@@ -174,5 +157,3 @@ export const server = [
     oneOf: [babelLoader, cssModuleLoaderServer, cssLoaderServer, urlLoaderServer, fileLoaderServer],
   },
 ];
-
-export default { client, server };

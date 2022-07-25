@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as express from 'express';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter as Router } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
@@ -16,13 +16,13 @@ const serverRenderer: any =
   () => (req: express.Request & { store: Store }, res: express.Response) => {
     const content = renderToString(
       <Provider store={res.locals.store}>
-        <Router location={req.url} context={routerContext}>
+        <StaticRouter location={req.url} context={routerContext}>
           <IntlProvider>
             <HelmetProvider context={helmetContext}>
               <App />
             </HelmetProvider>
           </IntlProvider>
-        </Router>
+        </StaticRouter>
       </Provider>
     );
 

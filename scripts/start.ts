@@ -6,7 +6,7 @@ rimraf.sync(paths.clientBuild);
 rimraf.sync(paths.serverBuild);
 
 if (clientOnly()) {
-    require('./start-client');
+  require('./start-client');
 } else {
-    require('./start-ssr');
+  require('./start-ssr');
 }

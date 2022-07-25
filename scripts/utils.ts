@@ -1,5 +1,3 @@
-import chalk from 'chalk';
-
 export const logMessage = (message: any, level = 'info') => {
   const color =
     level === 'error'
@@ -9,7 +7,6 @@ export const logMessage = (message: any, level = 'info') => {
       : level === 'info'
       ? 'blue'
       : 'white';
-  // console.log(`[${new Date().toISOString()}]`, chalk[color](message));
   console.log(`[${new Date().toISOString()}]`);
 };
 

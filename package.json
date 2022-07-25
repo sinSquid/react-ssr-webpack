@@ -4,7 +4,7 @@
   "author": "",
   "license": "MIT",
   "engines": {
-    "node": ">=10.18.1",
+    "node": ">=14.16.0",
     "yarn": "^1.22.0"
   },
   "scripts": {
@@ -120,7 +120,6 @@
     "core-js": "^3.23.5",
     "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
-    "css-hot-loader": "^1.4.4",
     "css-loader": "^6.7.1",
     "depcheck": "^1.4.3",
     "dependency-cruiser": "^11.12.0",
@@ -163,7 +162,6 @@
     "react-dev-utils": "^12.0.1",
     "react-refresh": "^0.14.0",
     "redux-mock-store": "^1.5.4",
-    "regenerator-runtime": "^0.13.9",
     "stats-webpack-plugin": "^0.7.0",
     "style-loader": "^3.3.1",
     "stylelint": "^14.9.1",

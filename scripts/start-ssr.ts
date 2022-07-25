@@ -80,11 +80,11 @@ const start = async () => {
     }
 
     if (stats.hasErrors()) {
-      const info = stats.toJson();
-      const errors = info.errors[0].split('\n');
-      logMessage(errors[0], 'error');
-      logMessage(errors[1], 'error');
-      logMessage(errors[2], 'error');
+      const { errors = [] } = stats.toJson({ errors: true });
+      const [first = {}, second = {}, third = {}] = errors;
+      logMessage(first.message, 'error');
+      logMessage(second.message, 'error');
+      logMessage(third.message, 'error');
     }
   });
 
